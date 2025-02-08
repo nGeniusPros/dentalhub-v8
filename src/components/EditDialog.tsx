@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import * as Icons from 'lucide-react';
-import { Button } from './ui/button';
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import * as Icons from "lucide-react";
+import { Button } from "./ui/button";
 
 interface EditDialogProps {
   isOpen: boolean;
   onClose: () => void;
   onSave: (data: any) => void;
   data: any;
-  type: 'staff' | 'provider' | 'patient';
+  type: "staff" | "provider" | "patient";
 }
 
 export const EditDialog: React.FC<EditDialogProps> = ({
@@ -16,7 +16,7 @@ export const EditDialog: React.FC<EditDialogProps> = ({
   onClose,
   onSave,
   data,
-  type
+  type,
 }) => {
   const [formData, setFormData] = useState(data);
 
@@ -37,7 +37,9 @@ export const EditDialog: React.FC<EditDialogProps> = ({
       >
         <div className="sticky top-0 bg-white border-b border-gray-200 p-6 z-10">
           <div className="flex items-center justify-between">
-            <h2 className="text-xl font-semibold">Edit {type.charAt(0).toUpperCase() + type.slice(1)}</h2>
+            <h2 className="text-xl font-semibold">
+              Edit {type.charAt(0).toUpperCase() + type.slice(1)}
+            </h2>
             <Button variant="ghost" size="sm" onClick={onClose}>
               <Icons.X className="w-5 h-5" />
             </Button>
@@ -54,7 +56,9 @@ export const EditDialog: React.FC<EditDialogProps> = ({
               <input
                 type="text"
                 value={formData.firstName}
-                onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, firstName: e.target.value })
+                }
                 className="w-full px-3 py-2 border border-gray-200 rounded-lg"
                 required
               />
@@ -66,7 +70,9 @@ export const EditDialog: React.FC<EditDialogProps> = ({
               <input
                 type="text"
                 value={formData.lastName}
-                onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, lastName: e.target.value })
+                }
                 className="w-full px-3 py-2 border border-gray-200 rounded-lg"
                 required
               />
@@ -79,7 +85,9 @@ export const EditDialog: React.FC<EditDialogProps> = ({
               <input
                 type="password"
                 value={formData.ssn}
-                onChange={(e) => setFormData({ ...formData, ssn: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, ssn: e.target.value })
+                }
                 className="w-full px-3 py-2 border border-gray-200 rounded-lg"
                 placeholder="XXX-XX-XXXX"
                 required
@@ -93,7 +101,9 @@ export const EditDialog: React.FC<EditDialogProps> = ({
               <input
                 type="date"
                 value={formData.dateOfBirth}
-                onChange={(e) => setFormData({ ...formData, dateOfBirth: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, dateOfBirth: e.target.value })
+                }
                 className="w-full px-3 py-2 border border-gray-200 rounded-lg"
                 required
               />
@@ -106,7 +116,9 @@ export const EditDialog: React.FC<EditDialogProps> = ({
               <input
                 type="email"
                 value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, email: e.target.value })
+                }
                 className="w-full px-3 py-2 border border-gray-200 rounded-lg"
                 required
               />
@@ -119,7 +131,9 @@ export const EditDialog: React.FC<EditDialogProps> = ({
               <input
                 type="tel"
                 value={formData.phone}
-                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, phone: e.target.value })
+                }
                 className="w-full px-3 py-2 border border-gray-200 rounded-lg"
                 required
               />
@@ -137,10 +151,12 @@ export const EditDialog: React.FC<EditDialogProps> = ({
                 <input
                   type="text"
                   value={formData.address?.street}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    address: { ...formData.address, street: e.target.value }
-                  })}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      address: { ...formData.address, street: e.target.value },
+                    })
+                  }
                   className="w-full px-3 py-2 border border-gray-200 rounded-lg"
                   required
                 />
@@ -152,10 +168,12 @@ export const EditDialog: React.FC<EditDialogProps> = ({
                 <input
                   type="text"
                   value={formData.address?.city}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    address: { ...formData.address, city: e.target.value }
-                  })}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      address: { ...formData.address, city: e.target.value },
+                    })
+                  }
                   className="w-full px-3 py-2 border border-gray-200 rounded-lg"
                   required
                 />
@@ -167,10 +185,12 @@ export const EditDialog: React.FC<EditDialogProps> = ({
                 <input
                   type="text"
                   value={formData.address?.state}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    address: { ...formData.address, state: e.target.value }
-                  })}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      address: { ...formData.address, state: e.target.value },
+                    })
+                  }
                   className="w-full px-3 py-2 border border-gray-200 rounded-lg"
                   required
                 />
@@ -182,10 +202,12 @@ export const EditDialog: React.FC<EditDialogProps> = ({
                 <input
                   type="text"
                   value={formData.address?.zip}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    address: { ...formData.address, zip: e.target.value }
-                  })}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      address: { ...formData.address, zip: e.target.value },
+                    })
+                  }
                   className="w-full px-3 py-2 border border-gray-200 rounded-lg"
                   required
                 />
@@ -194,7 +216,7 @@ export const EditDialog: React.FC<EditDialogProps> = ({
           </div>
 
           {/* RDA Information (if applicable) */}
-          {type === 'staff' && formData.role === 'Dental Assistant' && (
+          {type === "staff" && formData.role === "Dental Assistant" && (
             <div className="space-y-4">
               <h3 className="text-lg font-medium">RDA Information</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -205,7 +227,9 @@ export const EditDialog: React.FC<EditDialogProps> = ({
                   <input
                     type="text"
                     value={formData.rdaLicense}
-                    onChange={(e) => setFormData({ ...formData, rdaLicense: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, rdaLicense: e.target.value })
+                    }
                     className="w-full px-3 py-2 border border-gray-200 rounded-lg"
                     required
                   />
@@ -217,7 +241,12 @@ export const EditDialog: React.FC<EditDialogProps> = ({
                   <input
                     type="date"
                     value={formData.rdaExpiration}
-                    onChange={(e) => setFormData({ ...formData, rdaExpiration: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        rdaExpiration: e.target.value,
+                      })
+                    }
                     className="w-full px-3 py-2 border border-gray-200 rounded-lg"
                     required
                   />
@@ -274,7 +303,9 @@ export const EditDialog: React.FC<EditDialogProps> = ({
                 <input
                   type="date"
                   value={formData.startDate}
-                  onChange={(e) => setFormData({ ...formData, startDate: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, startDate: e.target.value })
+                  }
                   className="w-full px-3 py-2 border border-gray-200 rounded-lg"
                   required
                 />
@@ -286,7 +317,12 @@ export const EditDialog: React.FC<EditDialogProps> = ({
                 <input
                   type="date"
                   value={formData.terminationDate}
-                  onChange={(e) => setFormData({ ...formData, terminationDate: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      terminationDate: e.target.value,
+                    })
+                  }
                   className="w-full px-3 py-2 border border-gray-200 rounded-lg"
                 />
               </div>
@@ -296,7 +332,9 @@ export const EditDialog: React.FC<EditDialogProps> = ({
                 </label>
                 <select
                   value={formData.department}
-                  onChange={(e) => setFormData({ ...formData, department: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, department: e.target.value })
+                  }
                   className="w-full px-3 py-2 border border-gray-200 rounded-lg"
                   required
                 >
@@ -312,7 +350,9 @@ export const EditDialog: React.FC<EditDialogProps> = ({
                 </label>
                 <select
                   value={formData.status}
-                  onChange={(e) => setFormData({ ...formData, status: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, status: e.target.value })
+                  }
                   className="w-full px-3 py-2 border border-gray-200 rounded-lg"
                   required
                 >
@@ -335,7 +375,9 @@ export const EditDialog: React.FC<EditDialogProps> = ({
                 <input
                   type="number"
                   value={formData.salary}
-                  onChange={(e) => setFormData({ ...formData, salary: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, salary: e.target.value })
+                  }
                   className="w-full px-3 py-2 border border-gray-200 rounded-lg"
                   required
                 />
@@ -346,7 +388,9 @@ export const EditDialog: React.FC<EditDialogProps> = ({
                 </label>
                 <select
                   value={formData.payFrequency}
-                  onChange={(e) => setFormData({ ...formData, payFrequency: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, payFrequency: e.target.value })
+                  }
                   className="w-full px-3 py-2 border border-gray-200 rounded-lg"
                   required
                 >
@@ -362,9 +406,7 @@ export const EditDialog: React.FC<EditDialogProps> = ({
             <Button type="button" variant="outline" onClick={onClose}>
               Cancel
             </Button>
-            <Button type="submit">
-              Save Changes
-            </Button>
+            <Button type="submit">Save Changes</Button>
           </div>
         </form>
       </motion.div>

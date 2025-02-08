@@ -1,14 +1,14 @@
 export const ROUTES = {
-  HOME: '/',
+  HOME: "/",
   LOGIN: {
-    PATIENT: '/login/patient',
-    STAFF: '/login/staff',
-    ADMIN: '/login/admin'
+    PATIENT: "/login/patient",
+    STAFF: "/login/staff",
+    ADMIN: "/login/admin",
   },
   DASHBOARD: {
-    PATIENT: '/patient-dashboard',
-    STAFF: '/staff-dashboard',
-    ADMIN: '/admin-dashboard',
-    RESOURCES: '/admin-dashboard/resources'
-  }
+    PATIENT: "/patient-dashboard",
+    STAFF: "/staff-dashboard",
+    ADMIN: "/admin-dashboard",
+    RESOURCES: "/admin-dashboard/resources",
+  },
 } as const;

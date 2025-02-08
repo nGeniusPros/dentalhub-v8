@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import * as Icons from 'lucide-react';
-import { Button } from '../ui/button';
-import { cn } from '../../lib/utils';
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import * as Icons from "lucide-react";
+import { Button } from "../ui/button";
+import { cn } from "../../lib/utils";
 
 interface AddBonusModalProps {
   isOpen: boolean;
@@ -17,17 +17,17 @@ export const AddBonusModal: React.FC<AddBonusModalProps> = ({
   onClose,
   onAdd,
   staffId,
-  staffName
+  staffName,
 }) => {
   const [bonus, setBonus] = useState({
-    type: 'performance',
-    amount: '',
-    date: new Date().toISOString().split('T')[0],
-    reason: '',
+    type: "performance",
+    amount: "",
+    date: new Date().toISOString().split("T")[0],
+    reason: "",
     recurring: false,
-    frequency: 'one-time',
-    endDate: '',
-    metrics: [] as { metric: string; target: string; achieved: string }[]
+    frequency: "one-time",
+    endDate: "",
+    metrics: [] as { metric: string; target: string; achieved: string }[],
   });
 
   if (!isOpen) return null;
@@ -38,22 +38,22 @@ export const AddBonusModal: React.FC<AddBonusModalProps> = ({
       ...bonus,
       staffId,
       amount: parseFloat(bonus.amount),
-      createdAt: new Date().toISOString()
+      createdAt: new Date().toISOString(),
     });
     onClose();
   };
 
   const addMetric = () => {
-    setBonus(prev => ({
+    setBonus((prev) => ({
       ...prev,
-      metrics: [...prev.metrics, { metric: '', target: '', achieved: '' }]
+      metrics: [...prev.metrics, { metric: "", target: "", achieved: "" }],
     }));
   };
 
   const removeMetric = (index: number) => {
-    setBonus(prev => ({
+    setBonus((prev) => ({
       ...prev,
-      metrics: prev.metrics.filter((_, i) => i !== index)
+      metrics: prev.metrics.filter((_, i) => i !== index),
     }));
   };
 
@@ -68,7 +68,9 @@ export const AddBonusModal: React.FC<AddBonusModalProps> = ({
           <div className="flex items-center justify-between">
             <div>
               <h2 className="text-xl font-semibold">Add Bonus</h2>
-              <p className="text-sm text-gray-500">Adding bonus for {staffName}</p>
+              <p className="text-sm text-gray-500">
+                Adding bonus for {staffName}
+              </p>
             </div>
             <Button variant="ghost" size="sm" onClick={onClose}>
               <Icons.X className="w-5 h-5" />
@@ -106,7 +108,9 @@ export const AddBonusModal: React.FC<AddBonusModalProps> = ({
                 <input
                   type="number"
                   value={bonus.amount}
-                  onChange={(e) => setBonus({ ...bonus, amount: e.target.value })}
+                  onChange={(e) =>
+                    setBonus({ ...bonus, amount: e.target.value })
+                  }
                   className="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg"
                   placeholder="0.00"
                   step="0.01"
@@ -135,7 +139,9 @@ export const AddBonusModal: React.FC<AddBonusModalProps> = ({
               </label>
               <select
                 value={bonus.frequency}
-                onChange={(e) => setBonus({ ...bonus, frequency: e.target.value })}
+                onChange={(e) =>
+                  setBonus({ ...bonus, frequency: e.target.value })
+                }
                 className="w-full px-4 py-2 border border-gray-200 rounded-lg"
                 required
               >
@@ -147,7 +153,7 @@ export const AddBonusModal: React.FC<AddBonusModalProps> = ({
             </div>
           </div>
 
-          {bonus.frequency !== 'one-time' && (
+          {bonus.frequency !== "one-time" && (
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 End Date
@@ -155,7 +161,9 @@ export const AddBonusModal: React.FC<AddBonusModalProps> = ({
               <input
                 type="date"
                 value={bonus.endDate}
-                onChange={(e) => setBonus({ ...bonus, endDate: e.target.value })}
+                onChange={(e) =>
+                  setBonus({ ...bonus, endDate: e.target.value })
+                }
                 className="w-full px-4 py-2 border border-gray-200 rounded-lg"
                 required
               />
@@ -176,7 +184,7 @@ export const AddBonusModal: React.FC<AddBonusModalProps> = ({
           </div>
 
           {/* Performance Metrics */}
-          {bonus.type === 'performance' && (
+          {bonus.type === "performance" && (
             <div>
               <div className="flex items-center justify-between mb-2">
                 <label className="block text-sm font-medium text-gray-700">
@@ -249,9 +257,7 @@ export const AddBonusModal: React.FC<AddBonusModalProps> = ({
             <Button type="button" variant="outline" onClick={onClose}>
               Cancel
             </Button>
-            <Button type="submit">
-              Add Bonus
-            </Button>
+            <Button type="submit">Add Bonus</Button>
           </div>
         </form>
       </motion.div>

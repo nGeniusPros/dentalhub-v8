@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import * as Icons from 'lucide-react';
-import { Button } from './ui/button';
-import { cn } from '../lib/utils';
-import { saveAs } from 'file-saver';
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import * as Icons from "lucide-react";
+import { Button } from "./ui/button";
+import { cn } from "../lib/utils";
+import { saveAs } from "file-saver";
 
 interface ExportReportDialogProps {
   isOpen: boolean;
   onClose: () => void;
   onExport: (format: string, options: any) => void;
   data?: any;
-  type?: 'staff' | 'performance' | 'training' | 'financial';
+  type?: "staff" | "performance" | "training" | "financial";
 }
 
 export const ExportReportDialog: React.FC<ExportReportDialogProps> = ({
@@ -18,58 +18,58 @@ export const ExportReportDialog: React.FC<ExportReportDialogProps> = ({
   onClose,
   onExport,
   data,
-  type = 'staff'
+  type = "staff",
 }) => {
-  const [format, setFormat] = useState('pdf');
+  const [format, setFormat] = useState("pdf");
   const [options, setOptions] = useState({
     includeCharts: true,
     includeTables: true,
-    dateRange: 'all',
+    dateRange: "all",
     sections: {
       overview: true,
       details: true,
       metrics: true,
-      trends: true
+      trends: true,
     },
     customDateRange: {
-      start: '',
-      end: ''
-    }
+      start: "",
+      end: "",
+    },
   });
 
   if (!isOpen) return null;
 
   const handleExport = () => {
     // Generate filename based on type and date
-    const date = new Date().toISOString().split('T')[0];
+    const date = new Date().toISOString().split("T")[0];
     const filename = `${type}-report-${date}`;
 
     // Process data based on selected options
     const exportData = {
       ...data,
       generatedAt: new Date().toISOString(),
-      options
+      options,
     };
 
     // Export based on format
     switch (format) {
-      case 'pdf':
+      case "pdf":
         // In production, this would generate a PDF
-        console.log('Exporting PDF:', exportData);
+        console.log("Exporting PDF:", exportData);
         break;
 
-      case 'excel':
+      case "excel":
         // In production, this would generate an Excel file
-        console.log('Exporting Excel:', exportData);
+        console.log("Exporting Excel:", exportData);
         break;
 
-      case 'csv':
+      case "csv":
         // Generate CSV content
-        const csvContent = 'data:text/csv;charset=utf-8,' + 
-          Object.keys(data[0]).join(',') + '\n' +
-          data.map((row: any) => 
-            Object.values(row).join(',')
-          ).join('\n');
+        const csvContent =
+          "data:text/csv;charset=utf-8," +
+          Object.keys(data[0]).join(",") +
+          "\n" +
+          data.map((row: any) => Object.values(row).join(",")).join("\n");
 
         const encodedUri = encodeURI(csvContent);
         saveAs(encodedUri, `${filename}.csv`);
@@ -120,7 +120,9 @@ export const ExportReportDialog: React.FC<ExportReportDialogProps> = ({
             </label>
             <select
               value={options.dateRange}
-              onChange={(e) => setOptions(prev => ({ ...prev, dateRange: e.target.value }))}
+              onChange={(e) =>
+                setOptions((prev) => ({ ...prev, dateRange: e.target.value }))
+              }
               className="w-full px-4 py-2 border border-gray-200 rounded-lg mb-2"
             >
               <option value="all">All Time</option>
@@ -132,29 +134,43 @@ export const ExportReportDialog: React.FC<ExportReportDialogProps> = ({
               <option value="custom">Custom Range</option>
             </select>
 
-            {options.dateRange === 'custom' && (
+            {options.dateRange === "custom" && (
               <div className="grid grid-cols-2 gap-4 mt-2">
                 <div>
-                  <label className="block text-sm text-gray-500 mb-1">Start Date</label>
+                  <label className="block text-sm text-gray-500 mb-1">
+                    Start Date
+                  </label>
                   <input
                     type="date"
                     value={options.customDateRange.start}
-                    onChange={(e) => setOptions(prev => ({
-                      ...prev,
-                      customDateRange: { ...prev.customDateRange, start: e.target.value }
-                    }))}
+                    onChange={(e) =>
+                      setOptions((prev) => ({
+                        ...prev,
+                        customDateRange: {
+                          ...prev.customDateRange,
+                          start: e.target.value,
+                        },
+                      }))
+                    }
                     className="w-full px-4 py-2 border border-gray-200 rounded-lg"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm text-gray-500 mb-1">End Date</label>
+                  <label className="block text-sm text-gray-500 mb-1">
+                    End Date
+                  </label>
                   <input
                     type="date"
                     value={options.customDateRange.end}
-                    onChange={(e) => setOptions(prev => ({
-                      ...prev,
-                      customDateRange: { ...prev.customDateRange, end: e.target.value }
-                    }))}
+                    onChange={(e) =>
+                      setOptions((prev) => ({
+                        ...prev,
+                        customDateRange: {
+                          ...prev.customDateRange,
+                          end: e.target.value,
+                        },
+                      }))
+                    }
                     className="w-full px-4 py-2 border border-gray-200 rounded-lg"
                   />
                 </div>
@@ -172,10 +188,12 @@ export const ExportReportDialog: React.FC<ExportReportDialogProps> = ({
                 <input
                   type="checkbox"
                   checked={options.includeCharts}
-                  onChange={(e) => setOptions(prev => ({
-                    ...prev,
-                    includeCharts: e.target.checked
-                  }))}
+                  onChange={(e) =>
+                    setOptions((prev) => ({
+                      ...prev,
+                      includeCharts: e.target.checked,
+                    }))
+                  }
                   className="rounded border-gray-300"
                 />
                 <span className="text-sm">Charts and Graphs</span>
@@ -184,10 +202,12 @@ export const ExportReportDialog: React.FC<ExportReportDialogProps> = ({
                 <input
                   type="checkbox"
                   checked={options.includeTables}
-                  onChange={(e) => setOptions(prev => ({
-                    ...prev,
-                    includeTables: e.target.checked
-                  }))}
+                  onChange={(e) =>
+                    setOptions((prev) => ({
+                      ...prev,
+                      includeTables: e.target.checked,
+                    }))
+                  }
                   className="rounded border-gray-300"
                 />
                 <span className="text-sm">Data Tables</span>
@@ -206,13 +226,15 @@ export const ExportReportDialog: React.FC<ExportReportDialogProps> = ({
                   <input
                     type="checkbox"
                     checked={value}
-                    onChange={(e) => setOptions(prev => ({
-                      ...prev,
-                      sections: {
-                        ...prev.sections,
-                        [key]: e.target.checked
-                      }
-                    }))}
+                    onChange={(e) =>
+                      setOptions((prev) => ({
+                        ...prev,
+                        sections: {
+                          ...prev.sections,
+                          [key]: e.target.checked,
+                        },
+                      }))
+                    }
                     className="rounded border-gray-300"
                   />
                   <span className="text-sm capitalize">{key}</span>

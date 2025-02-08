@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import * as Icons from 'lucide-react';
-import { Button } from '../ui/button';
-import { MessageDialog } from '../MessageDialog';
-import { ReminderDialog } from '../ReminderDialog';
-import { CommentDialog } from '../CommentDialog';
-import { EditDialog } from '../EditDialog';
+import React, { useState } from "react";
+import * as Icons from "lucide-react";
+import { Button } from "../ui/button";
+import { MessageDialog } from "../MessageDialog";
+import { ReminderDialog } from "../ReminderDialog";
+import { CommentDialog } from "../CommentDialog";
+import { EditDialog } from "../EditDialog";
 
 interface AppointmentActionsProps {
   appointment: {
@@ -16,7 +16,7 @@ interface AppointmentActionsProps {
 }
 
 export const AppointmentActions: React.FC<AppointmentActionsProps> = ({
-  appointment
+  appointment,
 }) => {
   const [showMessage, setShowMessage] = useState(false);
   const [showReminder, setShowReminder] = useState(false);
@@ -26,8 +26,8 @@ export const AppointmentActions: React.FC<AppointmentActionsProps> = ({
   return (
     <>
       <div className="flex gap-2">
-        <Button 
-          variant="ghost" 
+        <Button
+          variant="ghost"
           size="sm"
           onClick={() => setShowMessage(true)}
           className="text-primary hover:text-primary-dark"
@@ -36,8 +36,8 @@ export const AppointmentActions: React.FC<AppointmentActionsProps> = ({
           Message
         </Button>
 
-        <Button 
-          variant="ghost" 
+        <Button
+          variant="ghost"
           size="sm"
           onClick={() => setShowReminder(true)}
           className="text-primary hover:text-primary-dark"
@@ -46,8 +46,8 @@ export const AppointmentActions: React.FC<AppointmentActionsProps> = ({
           Remind
         </Button>
 
-        <Button 
-          variant="ghost" 
+        <Button
+          variant="ghost"
           size="sm"
           onClick={() => setShowComment(true)}
           className="text-primary hover:text-primary-dark"
@@ -56,8 +56,8 @@ export const AppointmentActions: React.FC<AppointmentActionsProps> = ({
           Comment
         </Button>
 
-        <Button 
-          variant="ghost" 
+        <Button
+          variant="ghost"
           size="sm"
           onClick={() => setShowEdit(true)}
           className="text-primary hover:text-primary-dark"
@@ -72,12 +72,12 @@ export const AppointmentActions: React.FC<AppointmentActionsProps> = ({
         isOpen={showMessage}
         onClose={() => setShowMessage(false)}
         onSend={(message) => {
-          console.log('Sending message:', message);
+          console.log("Sending message:", message);
           setShowMessage(false);
         }}
         recipient={{
           name: appointment.patient,
-          email: `${appointment.patient.toLowerCase().replace(' ', '.')}@example.com`
+          email: `${appointment.patient.toLowerCase().replace(" ", ".")}@example.com`,
         }}
       />
 
@@ -86,16 +86,16 @@ export const AppointmentActions: React.FC<AppointmentActionsProps> = ({
         isOpen={showReminder}
         onClose={() => setShowReminder(false)}
         onSend={(reminder) => {
-          console.log('Sending reminder:', reminder);
+          console.log("Sending reminder:", reminder);
           setShowReminder(false);
         }}
         recipient={{
           name: appointment.patient,
           appointment: {
-            date: appointment.time.split(' ')[0],
-            time: appointment.time.split(' ')[1],
-            type: appointment.type
-          }
+            date: appointment.time.split(" ")[0],
+            time: appointment.time.split(" ")[1],
+            type: appointment.type,
+          },
         }}
       />
 
@@ -104,7 +104,7 @@ export const AppointmentActions: React.FC<AppointmentActionsProps> = ({
         isOpen={showComment}
         onClose={() => setShowComment(false)}
         onSubmit={(comment) => {
-          console.log('Adding comment:', comment);
+          console.log("Adding comment:", comment);
           setShowComment(false);
         }}
         title={`Add Comment - ${appointment.patient}`}
@@ -115,7 +115,7 @@ export const AppointmentActions: React.FC<AppointmentActionsProps> = ({
         isOpen={showEdit}
         onClose={() => setShowEdit(false)}
         onSave={(data) => {
-          console.log('Saving changes:', data);
+          console.log("Saving changes:", data);
           setShowEdit(false);
         }}
         data={appointment}

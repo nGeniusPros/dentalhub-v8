@@ -1,2 +1,2 @@
-import { Sidebar } from './Sidebar/index';
+import { Sidebar } from "./Sidebar/index";
 export { Sidebar };

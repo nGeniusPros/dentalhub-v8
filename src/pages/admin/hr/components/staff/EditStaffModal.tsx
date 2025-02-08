@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import * as Icons from 'lucide-react';
-import { Button } from '../../../../../components/ui/button';
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import * as Icons from "lucide-react";
+import { Button } from "../../../../../components/ui/button";
 
 interface EditStaffModalProps {
   isOpen: boolean;
@@ -22,17 +22,19 @@ export const EditStaffModal: React.FC<EditStaffModalProps> = ({
   isOpen,
   onClose,
   onSave,
-  staff
+  staff,
 }) => {
-  const [formData, setFormData] = useState(staff || {
-    name: '',
-    role: '',
-    department: '',
-    email: '',
-    phone: '',
-    status: 'active',
-    startDate: ''
-  });
+  const [formData, setFormData] = useState(
+    staff || {
+      name: "",
+      role: "",
+      department: "",
+      email: "",
+      phone: "",
+      status: "active",
+      startDate: "",
+    },
+  );
 
   // Update form data when staff prop changes
   React.useEffect(() => {
@@ -74,7 +76,9 @@ export const EditStaffModal: React.FC<EditStaffModalProps> = ({
               <input
                 type="text"
                 value={formData.name}
-                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, name: e.target.value })
+                }
                 className="w-full px-4 py-2 border border-gray-200 rounded-lg"
                 required
               />
@@ -86,7 +90,9 @@ export const EditStaffModal: React.FC<EditStaffModalProps> = ({
               </label>
               <select
                 value={formData.role}
-                onChange={(e) => setFormData({ ...formData, role: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, role: e.target.value })
+                }
                 className="w-full px-4 py-2 border border-gray-200 rounded-lg"
                 required
               >
@@ -104,7 +110,9 @@ export const EditStaffModal: React.FC<EditStaffModalProps> = ({
               </label>
               <select
                 value={formData.department}
-                onChange={(e) => setFormData({ ...formData, department: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, department: e.target.value })
+                }
                 className="w-full px-4 py-2 border border-gray-200 rounded-lg"
                 required
               >
@@ -121,7 +129,9 @@ export const EditStaffModal: React.FC<EditStaffModalProps> = ({
               <input
                 type="email"
                 value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, email: e.target.value })
+                }
                 className="w-full px-4 py-2 border border-gray-200 rounded-lg"
                 required
               />
@@ -134,7 +144,9 @@ export const EditStaffModal: React.FC<EditStaffModalProps> = ({
               <input
                 type="tel"
                 value={formData.phone}
-                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, phone: e.target.value })
+                }
                 className="w-full px-4 py-2 border border-gray-200 rounded-lg"
                 required
               />
@@ -146,7 +158,9 @@ export const EditStaffModal: React.FC<EditStaffModalProps> = ({
               </label>
               <select
                 value={formData.status}
-                onChange={(e) => setFormData({ ...formData, status: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, status: e.target.value })
+                }
                 className="w-full px-4 py-2 border border-gray-200 rounded-lg"
                 required
               >
@@ -161,9 +175,7 @@ export const EditStaffModal: React.FC<EditStaffModalProps> = ({
             <Button type="button" variant="outline" onClick={onClose}>
               Cancel
             </Button>
-            <Button type="submit">
-              Save Changes
-            </Button>
+            <Button type="submit">Save Changes</Button>
           </div>
         </form>
       </motion.div>

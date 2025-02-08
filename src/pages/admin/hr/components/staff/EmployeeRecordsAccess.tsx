@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import * as Icons from 'lucide-react';
-import { Button } from '../../../../../components/ui/button';
-import { useAuthContext } from '../../../../../contexts/AuthContext';
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import * as Icons from "lucide-react";
+import { Button } from "../../../../../components/ui/button";
+import { useAuthContext } from "../../../../../contexts/AuthContext";
 
 interface EmployeeRecordsAccessProps {
   isOpen: boolean;
@@ -13,28 +13,28 @@ interface EmployeeRecordsAccessProps {
 export const EmployeeRecordsAccess: React.FC<EmployeeRecordsAccessProps> = ({
   isOpen,
   onClose,
-  onAccess
+  onAccess,
 }) => {
   const { user } = useAuthContext();
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
-  const hasHRAccess = user?.role === 'admin' || 
-    user?.permissions?.includes('hr.full_access');
+  const hasHRAccess =
+    user?.role === "admin" || user?.permissions?.includes("hr.full_access");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!hasHRAccess) {
-      setError('You do not have permission to access employee records');
+      setError("You do not have permission to access employee records");
       return;
     }
-    
+
     // In production, verify password against secure backend
-    if (password === 'admin123') {
+    if (password === "admin123") {
       onAccess();
       onClose();
     } else {
-      setError('Invalid password');
+      setError("Invalid password");
     }
   };
 
@@ -63,7 +63,8 @@ export const EmployeeRecordsAccess: React.FC<EmployeeRecordsAccessProps> = ({
               <p className="text-sm font-medium">Restricted Access</p>
             </div>
             <p className="text-sm text-yellow-700 mt-1">
-              This area contains sensitive employee information and requires additional authentication.
+              This area contains sensitive employee information and requires
+              additional authentication.
             </p>
           </div>
 
@@ -74,8 +75,8 @@ export const EmployeeRecordsAccess: React.FC<EmployeeRecordsAccessProps> = ({
                 <p className="text-sm font-medium">Access Denied</p>
               </div>
               <p className="text-sm text-red-700 mt-1">
-                You do not have the required permissions to access employee records.
-                Please contact your administrator.
+                You do not have the required permissions to access employee
+                records. Please contact your administrator.
               </p>
             </div>
           )}
@@ -92,25 +93,21 @@ export const EmployeeRecordsAccess: React.FC<EmployeeRecordsAccessProps> = ({
                     value={password}
                     onChange={(e) => {
                       setPassword(e.target.value);
-                      setError('');
+                      setError("");
                     }}
                     className="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg"
                     required
                   />
                   <Icons.Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                 </div>
-                {error && (
-                  <p className="mt-1 text-sm text-red-600">{error}</p>
-                )}
+                {error && <p className="mt-1 text-sm text-red-600">{error}</p>}
               </div>
 
               <div className="flex justify-end gap-3 pt-4">
                 <Button type="button" variant="outline" onClick={onClose}>
                   Cancel
                 </Button>
-                <Button type="submit">
-                  Access Records
-                </Button>
+                <Button type="submit">Access Records</Button>
               </div>
             </>
           )}

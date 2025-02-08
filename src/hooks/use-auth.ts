@@ -1,5 +1,5 @@
-import { useState, useCallback } from 'react';
-import type { User } from '../types';
+import { useState, useCallback } from "react";
+import type { User } from "../types";
 
 export const useAuth = () => {
   const [user, setUser] = useState<User | null>(null);
@@ -12,33 +12,33 @@ export const useAuth = () => {
     try {
       // Mock user data based on email
       const mockUsers: Record<string, User> = {
-        'sarah.wilson@example.com': {
-          id: '1',
-          name: 'Dr. Sarah Wilson',
-          email: 'sarah.wilson@example.com',
-          role: 'staff',
-          title: 'Lead Dentist',
-          department: 'General Dentistry'
+        "sarah.wilson@example.com": {
+          id: "1",
+          name: "Dr. Sarah Wilson",
+          email: "sarah.wilson@example.com",
+          role: "staff",
+          title: "Lead Dentist",
+          department: "General Dentistry",
         },
-        'admin@example.com': {
-          id: '2',
-          name: 'Dr. Emily Parker',
-          email: 'admin@example.com',
-          role: 'admin',
-          title: 'Practice Administrator',
-          department: 'Administration'
-        }
+        "admin@example.com": {
+          id: "2",
+          name: "Dr. Emily Parker",
+          email: "admin@example.com",
+          role: "admin",
+          title: "Practice Administrator",
+          department: "Administration",
+        },
       };
 
       const mockUser = mockUsers[email];
       if (!mockUser) {
-        throw new Error('Invalid credentials');
+        throw new Error("Invalid credentials");
       }
 
       setUser(mockUser);
       return mockUser;
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'An error occurred');
+      setError(err instanceof Error ? err.message : "An error occurred");
       throw err;
     } finally {
       setLoading(false);
@@ -54,6 +54,6 @@ export const useAuth = () => {
     loading,
     error,
     login,
-    logout
+    logout,
   };
 };

@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import * as Icons from 'lucide-react';
-import { Button } from '../../../components/ui/button';
-import { VoiceCampaignList } from './components/voice/VoiceCampaignList';
-import { CreateCampaignDialog } from './components/voice/CreateCampaignDialog';
-import { AIAgentSettings } from './components/voice/AIAgentSettings';
-import { VoiceAnalytics } from './components/voice/VoiceAnalytics';
-import { TermsDialog } from './components/voice/TermsDialog';
-import { useSettings } from '../../../contexts/SettingsContext';
-import { VoiceCampaignStats } from './components/voice/VoiceCampaignStats';
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import * as Icons from "lucide-react";
+import { Button } from "../../../components/ui/button";
+import { VoiceCampaignList } from "./components/voice/VoiceCampaignList";
+import { CreateCampaignDialog } from "./components/voice/CreateCampaignDialog";
+import { AIAgentSettings } from "./components/voice/AIAgentSettings";
+import { VoiceAnalytics } from "./components/voice/VoiceAnalytics";
+import { TermsDialog } from "./components/voice/TermsDialog";
+import { useSettings } from "../../../contexts/SettingsContext";
+import { VoiceCampaignStats } from "./components/voice/VoiceCampaignStats";
 
 const VoiceCampaigns = () => {
   const [showCreateDialog, setShowCreateDialog] = useState(false);
@@ -18,7 +18,7 @@ const VoiceCampaigns = () => {
 
   // Check if terms have been accepted
   React.useEffect(() => {
-    const termsAccepted = localStorage.getItem('voiceTermsAccepted');
+    const termsAccepted = localStorage.getItem("voiceTermsAccepted");
     if (!termsAccepted) {
       setShowTermsDialog(true);
     }
@@ -30,13 +30,12 @@ const VoiceCampaigns = () => {
       <div className="flex justify-between items-center">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">Voice Campaigns</h1>
-          <p className="text-gray-500">Manage outbound calls and AI voice agent settings</p>
+          <p className="text-gray-500">
+            Manage outbound calls and AI voice agent settings
+          </p>
         </div>
         <div className="flex gap-3">
-          <Button 
-            variant="outline"
-            onClick={() => setShowAgentSettings(true)}
-          >
+          <Button variant="outline" onClick={() => setShowAgentSettings(true)}>
             <Icons.Settings className="w-4 h-4 mr-2" />
             AI Agent Settings
           </Button>
@@ -50,7 +49,7 @@ const VoiceCampaigns = () => {
       {/* Stats Overview */}
       <div className="space-y-6">
         <VoiceCampaignStats />
-        
+
         {/* Analytics Dashboard */}
         <VoiceAnalytics />
       </div>
@@ -75,7 +74,7 @@ const VoiceCampaigns = () => {
         open={showTermsDialog}
         onClose={() => {
           setShowTermsDialog(false);
-          localStorage.setItem('voiceTermsAccepted', 'true');
+          localStorage.setItem("voiceTermsAccepted", "true");
         }}
       />
     </div>

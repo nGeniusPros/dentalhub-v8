@@ -1,13 +1,13 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import * as Icons from 'lucide-react';
-import { useAuthContext } from '../../contexts/AuthContext';
+import React from "react";
+import { motion } from "framer-motion";
+import * as Icons from "lucide-react";
+import { useAuthContext } from "../../contexts/AuthContext";
 
 export const StaffWelcome = () => {
   const { user } = useAuthContext();
 
   return (
-    <motion.div 
+    <motion.div
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       className="flex items-center justify-between"

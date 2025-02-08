@@ -1,17 +1,17 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import * as Icons from 'lucide-react';
-import { Button } from '../../../../components/ui/button';
-import { EmployeeForm } from '../components/staff/EmployeeForm';
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+import * as Icons from "lucide-react";
+import { Button } from "../../../../components/ui/button";
+import { EmployeeForm } from "../components/staff/EmployeeForm";
 
 const NewStaffPage = () => {
   const navigate = useNavigate();
 
   const handleSubmit = (employeeData: any) => {
     // Handle employee creation
-    console.log('Creating new employee:', employeeData);
-    navigate('/admin-dashboard/hr');
+    console.log("Creating new employee:", employeeData);
+    navigate("/admin-dashboard/hr");
   };
 
   return (
@@ -23,7 +23,10 @@ const NewStaffPage = () => {
           </h1>
           <p className="text-gray-600">Create a new employee record</p>
         </div>
-        <Button variant="outline" onClick={() => navigate('/admin-dashboard/hr')}>
+        <Button
+          variant="outline"
+          onClick={() => navigate("/admin-dashboard/hr")}
+        >
           <Icons.X className="w-4 h-4 mr-2" />
           Cancel
         </Button>
@@ -36,7 +39,7 @@ const NewStaffPage = () => {
       >
         <EmployeeForm
           isOpen={true}
-          onClose={() => navigate('/admin-dashboard/hr')}
+          onClose={() => navigate("/admin-dashboard/hr")}
           onSubmit={handleSubmit}
         />
       </motion.div>

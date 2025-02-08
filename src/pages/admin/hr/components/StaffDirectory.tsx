@@ -1,39 +1,43 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import * as Icons from 'lucide-react';
-import { Button } from '../../../../components/ui/button';
-import { cn } from '../../../../lib/utils';
-import { ViewProfileModal } from './staff/ViewProfileModal';
-import { EditStaffModal } from './staff/EditStaffModal';
-import { DeleteConfirmationModal } from './staff/DeleteConfirmationModal';
-import { AddStaffModal } from './staff/AddStaffModal';
-import { useNotifications } from '../../../../contexts/NotificationContext';
-import { ExportDialog } from './ExportDialog';
-import { exportToCSV, exportToExcel, exportToPDF } from '../../../../lib/utils/export';
-import { StaffHRAccess } from './staff/StaffHRAccess';
+import React from "react";
+import { motion } from "framer-motion";
+import * as Icons from "lucide-react";
+import { Button } from "../../../../components/ui/button";
+import { cn } from "../../../../lib/utils";
+import { ViewProfileModal } from "./staff/ViewProfileModal";
+import { EditStaffModal } from "./staff/EditStaffModal";
+import { DeleteConfirmationModal } from "./staff/DeleteConfirmationModal";
+import { AddStaffModal } from "./staff/AddStaffModal";
+import { useNotifications } from "../../../../contexts/NotificationContext";
+import { ExportDialog } from "./ExportDialog";
+import {
+  exportToCSV,
+  exportToExcel,
+  exportToPDF,
+} from "../../../../lib/utils/export";
+import { StaffHRAccess } from "./staff/StaffHRAccess";
 
 export const StaffDirectory = () => {
   const [staff, setStaff] = React.useState([
     {
-      id: '1',
-      name: 'Dr. Sarah Wilson',
-      role: 'Lead Dentist',
-      department: 'Clinical',
-      email: 'sarah.w@example.com',
-      phone: '(555) 123-4567',
-      status: 'active',
-      startDate: '2020-01-15'
+      id: "1",
+      name: "Dr. Sarah Wilson",
+      role: "Lead Dentist",
+      department: "Clinical",
+      email: "sarah.w@example.com",
+      phone: "(555) 123-4567",
+      status: "active",
+      startDate: "2020-01-15",
     },
     {
-      id: '2',
-      name: 'John Smith',
-      role: 'Dental Hygienist',
-      department: 'Clinical',
-      email: 'john.s@example.com',
-      phone: '(555) 234-5678',
-      status: 'active',
-      startDate: '2021-03-01'
-    }
+      id: "2",
+      name: "John Smith",
+      role: "Dental Hygienist",
+      department: "Clinical",
+      email: "john.s@example.com",
+      phone: "(555) 234-5678",
+      status: "active",
+      startDate: "2021-03-01",
+    },
   ]);
 
   const [selectedStaff, setSelectedStaff] = React.useState<any>(null);
@@ -48,39 +52,41 @@ export const StaffDirectory = () => {
   const { dispatch: notifyDispatch } = useNotifications();
 
   const handleEditStaff = (updatedStaff: any) => {
-    setStaff(staff.map(member => 
-      member.email === updatedStaff.email ? updatedStaff : member
-    ));
-    
+    setStaff(
+      staff.map((member) =>
+        member.email === updatedStaff.email ? updatedStaff : member,
+      ),
+    );
+
     notifyDispatch({
-      type: 'ADD_NOTIFICATION',
+      type: "ADD_NOTIFICATION",
       payload: {
         id: Date.now().toString(),
-        type: 'message',
-        title: 'Staff Member Updated',
+        type: "message",
+        title: "Staff Member Updated",
         message: `${updatedStaff.name}'s information has been updated`,
         timestamp: new Date().toISOString(),
         read: false,
-        priority: 'medium'
-      }
+        priority: "medium",
+      },
     });
   };
 
   const handleDeleteStaff = (staffEmail: string) => {
-    const staffMember = staff.find(s => s.email === staffEmail);
-    setStaff(staff.filter(member => member.email !== staffEmail));
-    
+    const staffMember = staff.find((s) => s.email === staffEmail);
+    setStaff(staff.filter((member) => member.email !== staffEmail));
+
     notifyDispatch({
-      type: 'ADD_NOTIFICATION',
+      type: "ADD_NOTIFICATION",
       payload: {
         id: Date.now().toString(),
-        type: 'alert',
-        title: 'Staff Member Removed',
+        type: "alert",
+        title: "Staff Member Removed",
         message: `${staffMember?.name} has been removed from the directory`,
         timestamp: new Date().toISOString(),
         read: false,
-        priority: 'high'
-      }
+        priority: "high",
+      },
     });
   };
 
@@ -98,7 +104,9 @@ export const StaffDirectory = () => {
         <div className="flex gap-2">
           <Button variant="outline" size="sm">
             <Icons.Download className="w-4 h-4 mr-2" />
-            <span onClick={() => setShowExportDialog(true)}>Export Directory</span>
+            <span onClick={() => setShowExportDialog(true)}>
+              Export Directory
+            </span>
           </Button>
           <Button size="sm" onClick={() => setShowAddEmployee(true)}>
             <Icons.UserPlus className="w-4 h-4 mr-2" />
@@ -106,27 +114,27 @@ export const StaffDirectory = () => {
           </Button>
         </div>
       </div>
-      
+
       <ExportDialog
         isOpen={showExportDialog}
         onClose={() => setShowExportDialog(false)}
         onExport={(format, options) => {
-          const exportData = staff.map(member => ({
+          const exportData = staff.map((member) => ({
             name: member.name,
             role: member.role,
             department: member.department,
             email: member.email,
             phone: member.phone,
             status: member.status,
-            startDate: member.startDate
+            startDate: member.startDate,
           }));
 
-          if (format === 'csv') {
-            exportToCSV(exportData, 'staff-directory');
-          } else if (format === 'excel') {
-            exportToExcel(exportData, 'staff-directory');
-          } else if (format === 'pdf') {
-            exportToPDF(exportData, 'staff-directory');
+          if (format === "csv") {
+            exportToCSV(exportData, "staff-directory");
+          } else if (format === "excel") {
+            exportToExcel(exportData, "staff-directory");
+          } else if (format === "pdf") {
+            exportToPDF(exportData, "staff-directory");
           }
         }}
       />
@@ -144,10 +152,14 @@ export const StaffDirectory = () => {
                   <p className="text-sm text-gray-500">{member.role}</p>
                 </div>
               </div>
-              <span className={cn(
-                "px-2 py-1 text-xs font-medium rounded-full",
-                member.status === 'active' ? "bg-green-100 text-green-800" : "bg-gray-100 text-gray-800"
-              )}>
+              <span
+                className={cn(
+                  "px-2 py-1 text-xs font-medium rounded-full",
+                  member.status === "active"
+                    ? "bg-green-100 text-green-800"
+                    : "bg-gray-100 text-gray-800",
+                )}
+              >
                 {member.status}
               </span>
             </div>
@@ -168,9 +180,9 @@ export const StaffDirectory = () => {
             </div>
 
             <div className="mt-4 flex gap-2">
-              <Button 
-                size="sm" 
-                variant="outline" 
+              <Button
+                size="sm"
+                variant="outline"
                 onClick={() => {
                   setSelectedStaff(member);
                   setShowHRAccess(true);
@@ -179,9 +191,9 @@ export const StaffDirectory = () => {
                 <Icons.FileText className="w-4 h-4 mr-2" />
                 HR Files
               </Button>
-              <Button 
-                size="sm" 
-                variant="outline" 
+              <Button
+                size="sm"
+                variant="outline"
                 onClick={() => {
                   setSelectedStaff(member);
                   setShowViewProfile(true);
@@ -190,9 +202,9 @@ export const StaffDirectory = () => {
                 <Icons.FileText className="w-4 h-4 mr-2" />
                 View Profile
               </Button>
-              <Button 
-                size="sm" 
-                variant="outline" 
+              <Button
+                size="sm"
+                variant="outline"
                 onClick={() => {
                   setSelectedStaff(member);
                   setShowEditStaff(true);
@@ -201,10 +213,10 @@ export const StaffDirectory = () => {
                 <Icons.Edit2 className="w-4 h-4 mr-2" />
                 Edit
               </Button>
-              <Button 
-                size="sm" 
-                variant="outline" 
-                className="text-red-600 hover:text-red-700" 
+              <Button
+                size="sm"
+                variant="outline"
+                className="text-red-600 hover:text-red-700"
                 onClick={() => {
                   setSelectedStaff(member);
                   setShowDeleteConfirm(true);
@@ -217,7 +229,7 @@ export const StaffDirectory = () => {
           </div>
         ))}
       </div>
-      
+
       <ViewProfileModal
         isOpen={showViewProfile}
         onClose={() => {
@@ -226,7 +238,7 @@ export const StaffDirectory = () => {
         }}
         staff={selectedStaff}
       />
-      
+
       <EditStaffModal
         isOpen={showEditStaff}
         onClose={() => {
@@ -236,7 +248,7 @@ export const StaffDirectory = () => {
         onSave={handleEditStaff}
         staff={selectedStaff}
       />
-      
+
       <DeleteConfirmationModal
         isOpen={showDeleteConfirm}
         onClose={() => {
@@ -246,7 +258,7 @@ export const StaffDirectory = () => {
         onConfirm={() => handleDeleteStaff(selectedStaff?.email)}
         staffName={selectedStaff?.name}
       />
-      
+
       {/* Add Staff/Employee Modal - Used for both buttons */}
       <AddStaffModal
         isOpen={showAddStaff || showAddEmployee}
@@ -256,25 +268,25 @@ export const StaffDirectory = () => {
         }}
         onAdd={(staffMember) => {
           setStaff([...staff, { id: Date.now().toString(), ...staffMember }]);
-          
+
           notifyDispatch({
-            type: 'ADD_NOTIFICATION',
+            type: "ADD_NOTIFICATION",
             payload: {
               id: Date.now().toString(),
-              type: 'message',
-              title: 'New Staff Member Added',
+              type: "message",
+              title: "New Staff Member Added",
               message: `${staffMember.name} has been added as ${staffMember.role}`,
               timestamp: new Date().toISOString(),
               read: false,
-              priority: 'medium'
-            }
+              priority: "medium",
+            },
           });
-          
+
           setShowAddStaff(false);
           setShowAddEmployee(false);
         }}
       />
-      
+
       <StaffHRAccess
         isOpen={showHRAccess}
         staffId={selectedStaff?.id}

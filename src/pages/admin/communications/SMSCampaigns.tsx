@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import * as Icons from 'lucide-react';
-import { Button } from '../../../components/ui/button';
-import { SMSCampaignStats } from './components/sms/SMSCampaignStats';
-import { SMSAnalytics } from './components/sms/SMSAnalytics';
-import { AISMSInsights } from './components/sms/AISMSInsights';
-import { SMSCampaignList } from './components/sms/SMSCampaignList';
-import { CreateCampaignDialog } from './components/sms/CreateCampaignDialog';
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import * as Icons from "lucide-react";
+import { Button } from "../../../components/ui/button";
+import { SMSCampaignStats } from "./components/sms/SMSCampaignStats";
+import { SMSAnalytics } from "./components/sms/SMSAnalytics";
+import { AISMSInsights } from "./components/sms/AISMSInsights";
+import { SMSCampaignList } from "./components/sms/SMSCampaignList";
+import { CreateCampaignDialog } from "./components/sms/CreateCampaignDialog";
 
 const SMSCampaigns = () => {
   const [showCreateDialog, setShowCreateDialog] = useState(false);
@@ -21,7 +21,7 @@ const SMSCampaigns = () => {
           </h1>
           <p className="text-gray-600">Powered by: Ngenius Pros</p>
         </div>
-        <Button 
+        <Button
           onClick={() => setShowCreateDialog(true)}
           className="bg-gradient-to-r from-navy to-purple text-white"
         >

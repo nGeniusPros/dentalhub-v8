@@ -1,8 +1,8 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import * as Icons from 'lucide-react';
-import { useAuthContext } from '../../contexts/AuthContext';
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+import * as Icons from "lucide-react";
+import { useAuthContext } from "../../contexts/AuthContext";
 
 export const UserProfile = () => {
   const { user } = useAuthContext();
@@ -10,22 +10,22 @@ export const UserProfile = () => {
 
   const handleProfileClick = () => {
     if (!user) return;
-    
+
     switch (user.role) {
-      case 'admin':
-        navigate('/admin-dashboard/settings');
+      case "admin":
+        navigate("/admin-dashboard/settings");
         break;
-      case 'staff':
-        navigate('/staff-dashboard/settings');
+      case "staff":
+        navigate("/staff-dashboard/settings");
         break;
-      case 'patient':
-        navigate('/patient-dashboard/settings');
+      case "patient":
+        navigate("/patient-dashboard/settings");
         break;
     }
   };
 
   return (
-    <motion.div 
+    <motion.div
       whileHover={{ scale: 1.02 }}
       onClick={handleProfileClick}
       className="flex items-center gap-3 cursor-pointer"

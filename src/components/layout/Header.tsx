@@ -1,16 +1,18 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import * as Icons from 'lucide-react';
-import { ThemeToggle } from '../ThemeToggle';
-import { NotificationBell } from './NotificationBell';
-import { UserProfile } from './UserProfile';
-import { useAuthContext } from '../../contexts/AuthContext';
-import { useNotifications } from '../../contexts/NotificationContext';
+import React from "react";
+import { motion } from "framer-motion";
+import * as Icons from "lucide-react";
+import { ThemeToggle } from "../ThemeToggle";
+import { NotificationBell } from "./NotificationBell";
+import { UserProfile } from "./UserProfile";
+import { useAuthContext } from "../../contexts/AuthContext";
+import { useNotifications } from "../../contexts/NotificationContext";
 
 const Header = () => {
   const { user } = useAuthContext();
   const { state: notificationState } = useNotifications();
-  const unreadCount = notificationState.notifications.filter(n => !n.read).length;
+  const unreadCount = notificationState.notifications.filter(
+    (n) => !n.read,
+  ).length;
 
   return (
     <motion.header
@@ -26,7 +28,7 @@ const Header = () => {
           </h1>
           <p className="text-sm text-gray-500">Powered by: Ngenius Pros</p>
         </div>
-        
+
         <div className="flex items-center gap-6">
           <ThemeToggle />
           <NotificationBell count={unreadCount} />

@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import * as Icons from 'lucide-react';
-import { Button } from '../../components/ui/button';
-import { DashboardHeader } from './sections/DashboardHeader';
-import { KPIOverview } from './sections/KPIOverview';
-import { RevenueAnalytics } from './sections/RevenueAnalytics';
-import { PatientMetrics } from './sections/PatientMetrics';
-import { StaffPerformance } from './sections/StaffPerformance';
-import { MarketingMetrics } from './sections/MarketingMetrics';
-import { TreatmentAnalytics } from './sections/TreatmentAnalytics';
-import { AppointmentOverview } from './sections/AppointmentOverview';
-import { HygieneAnalytics } from './sections/HygieneAnalytics';
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import * as Icons from "lucide-react";
+import { Button } from "../../components/ui/button";
+import { DashboardHeader } from "./sections/DashboardHeader";
+import { KPIOverview } from "./sections/KPIOverview";
+import { RevenueAnalytics } from "./sections/RevenueAnalytics";
+import { PatientMetrics } from "./sections/PatientMetrics";
+import { StaffPerformance } from "./sections/StaffPerformance";
+import { MarketingMetrics } from "./sections/MarketingMetrics";
+import { TreatmentAnalytics } from "./sections/TreatmentAnalytics";
+import { AppointmentOverview } from "./sections/AppointmentOverview";
+import { HygieneAnalytics } from "./sections/HygieneAnalytics";
 
 const AdminDashboard = () => {
   const [showChat, setShowChat] = useState(false);
@@ -19,7 +19,7 @@ const AdminDashboard = () => {
     <div className="space-y-6">
       <DashboardHeader />
       <KPIOverview />
-      
+
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <RevenueAnalytics />
         <PatientMetrics />
@@ -43,9 +43,9 @@ const AdminDashboard = () => {
             <div className="p-4 border-b border-gray-200">
               <div className="flex items-center justify-between">
                 <h3 className="font-semibold">Chat</h3>
-                <Button 
-                  variant="ghost" 
-                  size="sm" 
+                <Button
+                  variant="ghost"
+                  size="sm"
                   onClick={() => setShowChat(false)}
                 >
                   <Icons.X className="w-4 h-4" />

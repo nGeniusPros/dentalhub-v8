@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import * as Icons from 'lucide-react';
-import { Button } from '../../../../../components/ui/button';
-import { EmployeeRecordsAccess } from './EmployeeRecordsAccess';
-import { cn } from '../../../../../lib/utils';
-import { useNotifications } from '../../../../../contexts/NotificationContext';
-import { useAuthContext } from '../../../../../contexts/AuthContext';
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import * as Icons from "lucide-react";
+import { Button } from "../../../../../components/ui/button";
+import { EmployeeRecordsAccess } from "./EmployeeRecordsAccess";
+import { cn } from "../../../../../lib/utils";
+import { useNotifications } from "../../../../../contexts/NotificationContext";
+import { useAuthContext } from "../../../../../contexts/AuthContext";
 
 interface AddStaffModalProps {
   isOpen: boolean;
@@ -16,20 +16,20 @@ interface AddStaffModalProps {
 export const AddStaffModal: React.FC<AddStaffModalProps> = ({
   isOpen,
   onClose,
-  onAdd
+  onAdd,
 }) => {
   const [formData, setFormData] = useState({
-    name: '',
-    role: '',
-    department: '',
-    email: '',
-    phone: '',
-    startDate: '',
-    status: 'active',
+    name: "",
+    role: "",
+    department: "",
+    email: "",
+    phone: "",
+    startDate: "",
+    status: "active",
     credentials: {
-      username: '',
-      password: ''
-    }
+      username: "",
+      password: "",
+    },
   });
 
   const { dispatch: notifyDispatch } = useNotifications();
@@ -38,19 +38,19 @@ export const AddStaffModal: React.FC<AddStaffModalProps> = ({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // Create welcome notification for new staff member
     notifyDispatch({
-      type: 'ADD_NOTIFICATION',
+      type: "ADD_NOTIFICATION",
       payload: {
         id: Date.now().toString(),
-        type: 'message',
-        title: 'Welcome New Staff Member',
+        type: "message",
+        title: "Welcome New Staff Member",
         message: `${formData.name} has joined the team as ${formData.role}`,
         timestamp: new Date().toISOString(),
         read: false,
-        priority: 'medium'
-      }
+        priority: "medium",
+      },
     });
 
     onAdd(formData);
@@ -82,7 +82,9 @@ export const AddStaffModal: React.FC<AddStaffModalProps> = ({
               <input
                 type="text"
                 value={formData.name}
-                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, name: e.target.value })
+                }
                 className="w-full px-4 py-2 border border-gray-200 rounded-lg"
                 required
               />
@@ -94,7 +96,9 @@ export const AddStaffModal: React.FC<AddStaffModalProps> = ({
               </label>
               <select
                 value={formData.role}
-                onChange={(e) => setFormData({ ...formData, role: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, role: e.target.value })
+                }
                 className="w-full px-4 py-2 border border-gray-200 rounded-lg"
                 required
               >
@@ -113,7 +117,9 @@ export const AddStaffModal: React.FC<AddStaffModalProps> = ({
               </label>
               <select
                 value={formData.department}
-                onChange={(e) => setFormData({ ...formData, department: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, department: e.target.value })
+                }
                 className="w-full px-4 py-2 border border-gray-200 rounded-lg"
                 required
               >
@@ -131,7 +137,9 @@ export const AddStaffModal: React.FC<AddStaffModalProps> = ({
               <input
                 type="email"
                 value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, email: e.target.value })
+                }
                 className="w-full px-4 py-2 border border-gray-200 rounded-lg"
                 required
               />
@@ -144,7 +152,9 @@ export const AddStaffModal: React.FC<AddStaffModalProps> = ({
               <input
                 type="tel"
                 value={formData.phone}
-                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, phone: e.target.value })
+                }
                 className="w-full px-4 py-2 border border-gray-200 rounded-lg"
                 required
               />
@@ -157,7 +167,9 @@ export const AddStaffModal: React.FC<AddStaffModalProps> = ({
               <input
                 type="date"
                 value={formData.startDate}
-                onChange={(e) => setFormData({ ...formData, startDate: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, startDate: e.target.value })
+                }
                 className="w-full px-4 py-2 border border-gray-200 rounded-lg"
                 required
               />
@@ -174,10 +186,15 @@ export const AddStaffModal: React.FC<AddStaffModalProps> = ({
                 <input
                   type="text"
                   value={formData.credentials.username}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    credentials: { ...formData.credentials, username: e.target.value }
-                  })}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      credentials: {
+                        ...formData.credentials,
+                        username: e.target.value,
+                      },
+                    })
+                  }
                   className="w-full px-4 py-2 border border-gray-200 rounded-lg"
                   required
                 />
@@ -190,10 +207,15 @@ export const AddStaffModal: React.FC<AddStaffModalProps> = ({
                 <input
                   type="password"
                   value={formData.credentials.password}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    credentials: { ...formData.credentials, password: e.target.value }
-                  })}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      credentials: {
+                        ...formData.credentials,
+                        password: e.target.value,
+                      },
+                    })
+                  }
                   className="w-full px-4 py-2 border border-gray-200 rounded-lg"
                   required
                 />
@@ -205,9 +227,7 @@ export const AddStaffModal: React.FC<AddStaffModalProps> = ({
             <Button type="button" variant="outline" onClick={onClose}>
               Cancel
             </Button>
-            <Button type="submit">
-              Add Staff Member
-            </Button>
+            <Button type="submit">Add Staff Member</Button>
           </div>
         </form>
       </motion.div>
