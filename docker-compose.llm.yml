@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  deepseek:
+    build:
+      context: .
+      dockerfile: llm.Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - MAX_CONCURRENT_REQUESTS=10
+    deploy:
+      resources:
+        limits:
+          memory: 16G
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
