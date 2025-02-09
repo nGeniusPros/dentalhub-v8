@@ -1,5 +1,6 @@
-import React, { createContext, useContext, useReducer } from "react";
+import React, { createContext, useContext, useReducer, useEffect } from "react";
 import type { Notification, NotificationState } from "../types/notification";
+import { supabase } from '@/lib/supabaseClient'
 
 type NotificationAction =
   | { type: "ADD_NOTIFICATION"; payload: Notification }
@@ -75,6 +76,8 @@ const NotificationContext = createContext<
   | {
       state: NotificationState;
       dispatch: React.Dispatch<NotificationAction>;
+      fetchNotifications: (userId: string) => Promise<Notification[]>;
+      markNotificationRead: (notificationId: string) => Promise<void>;
     }
   | undefined
 >(undefined);
@@ -84,8 +87,37 @@ export const NotificationProvider: React.FC<{ children: React.ReactNode }> = ({
 }) => {
   const [state, dispatch] = useReducer(notificationReducer, initialState);
 
+  const fetchNotifications = async (userId: string) => {
+    const { data, error } = await supabase
+      .from('notifications')
+      .select('*')
+      .eq('user_id', userId)
+      .order('created_at', { ascending: false })
+
+    if (error) throw error
+    return data
+  }
+
+  const markNotificationRead = async (notificationId: string) => {
+    const { error } = await supabase
+      .from('notifications')
+      .update({ read: true })
+      .eq('id', notificationId)
+
+    if (error) throw error
+  }
+
+  useEffect(() => {
+    const userId = supabase.auth.user()?.id
+    if (userId) {
+      fetchNotifications(userId).then(notifications => {
+        dispatch({ type: 'ADD_NOTIFICATION', payload: notifications })
+      })
+    }
+  }, [])
+
   return (
-    <NotificationContext.Provider value={{ state, dispatch }}>
+    <NotificationContext.Provider value={{ state, dispatch, fetchNotifications, markNotificationRead }}>
       {children}
     </NotificationContext.Provider>
   );
