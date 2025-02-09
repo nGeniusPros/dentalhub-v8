@@ -1,4 +1,9 @@
-FROM nvidia/cuda:12.1.1-base-ubuntu22.04
+FROM nvidia/cuda:12.1.1-devel-ubuntu22.04
+
+# Set CUDA environment variables early
+ENV CUDA_HOME=/usr/local/cuda
+ENV PATH=${CUDA_HOME}/bin:${PATH}
+ENV LD_LIBRARY_PATH=${CUDA_HOME}/lib64:${LD_LIBRARY_PATH}
 
 WORKDIR /app
 
@@ -11,15 +16,22 @@ RUN apt-get update && \
     git \
     build-essential \
     ninja-build \
+    cmake \
     && rm -rf /var/lib/apt/lists/*
 
-# Set environment variables for CUDA
-ENV CUDA_HOME=/usr/local/cuda
-ENV PATH=${CUDA_HOME}/bin:${PATH}
-ENV LD_LIBRARY_PATH=${CUDA_HOME}/lib64:${LD_LIBRARY_PATH}
+# Install numpy first to avoid conflicts
+RUN pip3 install --no-cache-dir "numpy<2"
+
+# Install PyTorch with CUDA 12.1 support
+RUN pip3 install --no-cache-dir \
+    torch==2.1.1+cu121 \
+    torchvision==0.16.1+cu121 \
+    torchaudio==2.1.1+cu121 \
+    --index-url https://download.pytorch.org/whl/cu121
 
 # Install Python dependencies
 COPY llm-requirements.txt .
+RUN pip3 install --no-cache-dir packaging
 RUN pip3 install --no-cache-dir -r llm-requirements.txt
 
 # Copy API implementation
