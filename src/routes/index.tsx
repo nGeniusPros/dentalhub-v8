@@ -1,17 +1,13 @@
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import LandingPage from "../pages/login/LandingPage";
+import LandingPage from "../pages/Login";
 import AdminDashboard from "../pages/admin/AdminDashboard";
-import StaffDashboard from "../pages/staff/StaffDashboard";
 import DashboardLayout from "../components/layout/DashboardLayout";
 import InsuranceARDashboard from "../pages/admin/insurance/InsuranceARDashboard";
 import HRDashboard from "../pages/admin/hr/HRDashboard";
 import AdminLogin from "../pages/login/AdminLogin";
-import StaffLogin from "../pages/login/StaffLogin";
 import PatientLogin from "../pages/login/PatientLogin";
-import PatientDashboard from "../pages/patient/PatientDashboard";
 import MembershipPlans from "../pages/admin/MembershipPlans";
-import Membership from "../pages/patient/Membership";
 import AIPracticeConsultant from "../pages/admin/AIPracticeConsultant";
 import Analytics from "../pages/admin/Analytics";
 import Patients from "../pages/admin/Patients";
@@ -36,7 +32,6 @@ export const AppRoutes = () => {
       {/* Login routes */}
       <Route path="/login">
         <Route path="patient" element={<PatientLogin />} />
-        <Route path="staff" element={<StaffLogin />} />
         <Route path="admin" element={<AdminLogin />} />
       </Route>
 
@@ -60,22 +55,6 @@ export const AppRoutes = () => {
         <Route path="contact-manager" element={<VendorManagement />} />
         <Route path="marketplace" element={<Marketplace />} />
         {/* Add other admin routes */}
-      </Route>
-
-      {/* Staff routes */}
-      <Route path="/staff-dashboard" element={<DashboardLayout role="staff" />}>
-        <Route index element={<StaffDashboard />} />
-        {/* Add staff routes */}
-      </Route>
-
-      {/* Patient routes */}
-      <Route
-        path="/patient-dashboard"
-        element={<DashboardLayout role="patient" />}
-      >
-        <Route index element={<PatientDashboard />} />
-        <Route path="membership" element={<Membership />} />
-        {/* Add patient routes */}
       </Route>
 
       {/* Fallback route */}

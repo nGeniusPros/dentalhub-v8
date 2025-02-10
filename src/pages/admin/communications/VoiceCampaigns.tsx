@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { motion } from "framer-motion";
-import * as Icons from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
+import { Gear, Plus, Phone, Activity } from "lucide-react";
 import { Button } from "../../../components/ui/button";
+import { Badge } from "../../../components/ui/badge";
 import { VoiceCampaignList } from "./components/voice/VoiceCampaignList";
 import { CreateCampaignDialog } from "./components/voice/CreateCampaignDialog";
 import { AIAgentSettings } from "./components/voice/AIAgentSettings";
@@ -25,58 +26,59 @@ const VoiceCampaigns = () => {
   }, []);
 
   return (
-    <div className="space-y-6">
-      {/* Header */}
-      <div className="flex justify-between items-center">
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900">Voice Campaigns</h1>
-          <p className="text-gray-500">
-            Manage outbound calls and AI voice agent settings
-          </p>
-        </div>
-        <div className="flex gap-3">
-          <Button variant="outline" onClick={() => setShowAgentSettings(true)}>
-            <Icons.Settings className="w-4 h-4 mr-2" />
-            AI Agent Settings
+    <div className="p-6 space-y-6 bg-gray-lighter min-h-screen">
+      <div className="bg-white p-6 rounded-xl shadow-sm">
+        <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center gap-3">
+            <Phone className="w-8 h-8 text-gold" />
+            <h1 className="text-2xl font-bold text-navy">
+              Voice Campaigns
+              <span className="ml-2 text-sm font-normal text-gray-darker">
+                <Activity className="inline mr-1 w-4 h-4" />
+                3 Active Campaigns
+              </span>
+            </h1>
+          </div>
+          <Button variant="primary" onClick={() => setShowCreateDialog(true)}>
+            <Plus className="w-4 h-4 mr-2" />
+            New Campaign
           </Button>
-          <Button onClick={() => setShowCreateDialog(true)}>
-            <Icons.Plus className="w-4 h-4 mr-2" />
-            Create Campaign
-          </Button>
         </div>
+
+        {/* Stats Overview */}
+        <div className="space-y-6">
+          <VoiceCampaignStats />
+
+          {/* Analytics Dashboard */}
+          <VoiceAnalytics />
+        </div>
+
+        {/* Campaign List */}
+        <AnimatePresence>
+          <VoiceCampaignList />
+        </AnimatePresence>
+
+        {/* Create Campaign Dialog */}
+        <CreateCampaignDialog
+          open={showCreateDialog}
+          onClose={() => setShowCreateDialog(false)}
+        />
+
+        {/* AI Agent Settings Dialog */}
+        <AIAgentSettings
+          open={showAgentSettings}
+          onClose={() => setShowAgentSettings(false)}
+        />
+
+        {/* Terms and Conditions Dialog */}
+        <TermsDialog
+          open={showTermsDialog}
+          onClose={() => {
+            setShowTermsDialog(false);
+            localStorage.setItem("voiceTermsAccepted", "true");
+          }}
+        />
       </div>
-
-      {/* Stats Overview */}
-      <div className="space-y-6">
-        <VoiceCampaignStats />
-
-        {/* Analytics Dashboard */}
-        <VoiceAnalytics />
-      </div>
-
-      {/* Campaign List */}
-      <VoiceCampaignList />
-
-      {/* Create Campaign Dialog */}
-      <CreateCampaignDialog
-        open={showCreateDialog}
-        onClose={() => setShowCreateDialog(false)}
-      />
-
-      {/* AI Agent Settings Dialog */}
-      <AIAgentSettings
-        open={showAgentSettings}
-        onClose={() => setShowAgentSettings(false)}
-      />
-
-      {/* Terms and Conditions Dialog */}
-      <TermsDialog
-        open={showTermsDialog}
-        onClose={() => {
-          setShowTermsDialog(false);
-          localStorage.setItem("voiceTermsAccepted", "true");
-        }}
-      />
     </div>
   );
 };
