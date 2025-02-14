@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import type { Employee } from '../../../../../types/employee';
 import { motion } from 'framer-motion';
 import * as Icons from 'lucide-react';
 import { Button } from '../../../../../components/ui/button';
@@ -7,8 +8,8 @@ import { useNotifications } from '../../../../../contexts/NotificationContext';
 interface EmployeeFormProps {
   isOpen: boolean;
   onClose: () => void;
-  onSubmit: (employee: any) => void;
-  employee?: any;
+  onSubmit: (employee: Employee) => void;
+  employee?: Employee;
 }
 
 export const EmployeeForm: React.FC<EmployeeFormProps> = ({
@@ -834,10 +835,8 @@ export const EmployeeForm: React.FC<EmployeeFormProps> = ({
                     </div>
 
                     <div>
-                      <label Continuing the EmployeeForm.tsx content exactly where it left off:
-
                       <label className="block text-sm font-medium text-gray-700 mb-1">
-                        Date Received
+                        Emergency Contact Relationship
                       </label>
                       <input
                         type="date"

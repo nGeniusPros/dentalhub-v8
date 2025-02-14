@@ -1,23 +1,22 @@
 import React, { useState } from "react";
-import { motion } from "framer-motion";
 import * as Icons from "lucide-react";
-import { Button } from "../../components/ui/button";
-import { DashboardHeader } from "./sections/DashboardHeader";
-import { KPIOverview } from "./sections/KPIOverview";
-import { RevenueAnalytics } from "./sections/RevenueAnalytics";
-import { PatientMetrics } from "./sections/PatientMetrics";
-import { StaffPerformance } from "./sections/StaffPerformance";
-import { MarketingMetrics } from "./sections/MarketingMetrics";
-import { TreatmentAnalytics } from "./sections/TreatmentAnalytics";
-import { AppointmentOverview } from "./sections/AppointmentOverview";
-import { HygieneAnalytics } from "./sections/HygieneAnalytics";
+import { Button } from "../components/ui/button";
+import { DashboardHeader } from "../components/admin/DashboardHeader";
+import { KPIOverview } from "../features/admin/KPIOverview";
+import { RevenueAnalytics } from "../features/admin/RevenueAnalytics";
+import { PatientMetrics } from "../features/admin/PatientMetrics";
+import { StaffPerformance } from "../features/admin/StaffPerformance";
+import { MarketingMetrics } from "../features/admin/MarketingMetrics";
+import { TreatmentAnalytics } from "../features/admin/TreatmentAnalytics";
+import { AppointmentOverview } from "../features/admin/AppointmentOverview";
+import { HygieneAnalytics } from "../features/admin/HygieneAnalytics";
 
 const AdminDashboard = () => {
   const [showChat, setShowChat] = useState(false);
 
   return (
     <div className="space-y-6">
-      <DashboardHeader />
+      <DashboardHeader title="Admin Dashboard" />
       <KPIOverview />
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">

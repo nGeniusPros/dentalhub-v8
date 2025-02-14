@@ -1,4 +1,3 @@
-```typescript
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import * as Icons from 'lucide-react';
@@ -83,14 +82,12 @@ export const AddBadgeModal: React.FC<AddBadgeModalProps> = ({
           <div className="flex justify-center mb-6">
             <div className={cn(
               "w-24 h-24 rounded-xl flex items-center justify-center",
-              `bg-${badge.color}/10`
+              `bg-${badge.color}-400/10`
             )}>
-              {React.createElement(Icons[badge.icon as keyof typeof Icons], {
-                className: cn(
-                  "w-12 h-12",
-                  `text-${badge.color}`
-                )
-              })}
+              {(() => {
+                const IconComponent = Icons[badge.icon as keyof typeof Icons] as React.ElementType;
+                return <IconComponent className={cn("w-12 h-12", `text-${badge.color}`)} />;
+              })()}
             </div>
           </div>
 
@@ -239,4 +236,3 @@ export const AddBadgeModal: React.FC<AddBadgeModalProps> = ({
     </div>
   );
 };
-```

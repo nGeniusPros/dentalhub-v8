@@ -108,13 +108,15 @@ export const NotificationProvider: React.FC<{ children: React.ReactNode }> = ({
   }
 
   useEffect(() => {
-    const userId = supabase.auth.user()?.id
-    if (userId) {
-      fetchNotifications(userId).then(notifications => {
-        dispatch({ type: 'ADD_NOTIFICATION', payload: notifications })
-      })
-    }
-  }, [])
+    const fetchUserAndNotifications = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        const notifications = await fetchNotifications(user.id);
+        dispatch({ type: 'ADD_NOTIFICATION', payload: notifications });
+      }
+    };
+    fetchUserAndNotifications();
+  }, []);
 
   return (
     <NotificationContext.Provider value={{ state, dispatch, fetchNotifications, markNotificationRead }}>

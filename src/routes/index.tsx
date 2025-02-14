@@ -1,15 +1,14 @@
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import LandingPage from "../pages/Login";
-import AdminDashboard from "../pages/admin/AdminDashboard";
+import SalesLanding from "../pages/SalesLanding";
+import Login from "../pages/Login";
+import Dashboard from "../pages/AdminDashboard.tsx";
 import DashboardLayout from "../components/layout/DashboardLayout";
 import InsuranceARDashboard from "../pages/admin/insurance/InsuranceARDashboard";
 import HRDashboard from "../pages/admin/hr/HRDashboard";
 import AdminLogin from "../pages/login/AdminLogin";
-import PatientLogin from "../pages/login/PatientLogin";
 import MembershipPlans from "../pages/admin/MembershipPlans";
 import AIPracticeConsultant from "../pages/admin/AIPracticeConsultant";
-import Analytics from "../pages/admin/Analytics";
 import Patients from "../pages/admin/Patients";
 import SMSCampaigns from "../pages/admin/communications/SMSCampaigns";
 import PasswordManager from "../pages/admin/settings/PasswordManager";
@@ -27,22 +26,22 @@ export const AppRoutes = () => {
   return (
     <Routes>
       {/* Public routes */}
-      <Route path="/" element={<LandingPage />} />
+      <Route path="/" element={<SalesLanding />} />
 
       {/* Login routes */}
       <Route path="/login">
-        <Route path="patient" element={<PatientLogin />} />
+        <Route index element={<Login />} />
         <Route path="admin" element={<AdminLogin />} />
       </Route>
 
       {/* Admin routes */}
       <Route path="/admin-dashboard" element={<DashboardLayout role="admin" />}>
-        <Route index element={<AdminDashboard />} />
+        <Route index element={<Dashboard />} />
         <Route path="ai-consultant" element={<AIPracticeConsultant />} />
         <Route path="hr" element={<HRDashboard />} />
         <Route path="insurance" element={<InsuranceARDashboard />} />
         <Route path="patients" element={<Patients />} />
-        <Route path="staff" element={<StaffManagement />} />
+        <Route path="staff-management" element={<StaffManagement />} />
         <Route path="membership-plans" element={<MembershipPlans />} />
         <Route path="sms-campaigns" element={<SMSCampaigns />} />
         <Route path="resources" element={<ResourcesDashboard />} />

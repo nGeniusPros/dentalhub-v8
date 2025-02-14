@@ -1,17 +1,17 @@
 import { useQuery } from '@tanstack/react-query'
-import { fetchCampaigns } from '@/lib/instantlyClient'
+import { fetchCampaigns } from '@/services/marketing'
 import { Skeleton } from '@/components/ui/skeleton'
 
 export default function CampaignList() {
-  const { data, error, isLoading } = useQuery({
-    queryKey: ['campaigns'],
+  const { data: campaigns, isLoading } = useQuery({
+    queryKey: ['marketing-campaigns'],
     queryFn: fetchCampaigns,
-    retry: 2
+    staleTime: 60_000
   })
 
-  if (error) return (
+  if (!campaigns) return (
     <div className="p-4 bg-red-50 text-red-600 rounded-lg">
-      Error loading campaigns: {error.message}
+      Error loading campaigns
     </div>
   )
 
@@ -25,7 +25,7 @@ export default function CampaignList() {
         </div>
       ) : (
         <div className="bg-white rounded-xl shadow-sm divide-y">
-          {data?.map(campaign => (
+          {campaigns?.map(campaign => (
             <div key={campaign.campaign_id} className="p-4 hover:bg-gray-50">
               <div className="flex justify-between items-center">
                 <span className="font-medium">{campaign.name}</span>

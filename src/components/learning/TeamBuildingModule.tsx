@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import * as Icons from 'lucide-react';
-import { Button } from '../ui/button';
-import { cn } from '../../lib/utils';
 import { useNotifications } from '../../contexts/NotificationContext';
 
 interface TeamBuildingModuleProps {
@@ -42,7 +40,7 @@ export const TeamBuildingModule: React.FC<TeamBuildingModuleProps> = ({
     {
       id: '2',
       title: 'Conflict Resolution',
-      description: 'Two team members disagree on the best approach for a project. What's your solution?',
+      description: "Two team members disagree on the best approach for a project. What's your solution?",
       options: [
         {
           text: 'Schedule a meeting to discuss both approaches objectively',

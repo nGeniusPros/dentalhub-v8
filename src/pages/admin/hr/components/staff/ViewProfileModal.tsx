@@ -4,7 +4,6 @@ import * as Icons from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../../../../../components/ui/button";
 import { cn } from "../../../../../lib/utils";
-import { TrainingAssignmentButton } from "../../../../../components/staff/TrainingAssignmentButton";
 import { formatCurrency } from "../../../../../lib/utils/currency";
 
 interface ViewProfileModalProps {
@@ -531,14 +530,6 @@ export const ViewProfileModal: React.FC<ViewProfileModalProps> = ({
             <Button variant="outline" onClick={onClose}>
               Close
             </Button>
-            <TrainingAssignmentButton
-              staffId={staff.id}
-              staffName={staff.name}
-              onAssign={(modules) => {
-                console.log("Assigned modules:", modules);
-                // Handle module assignment
-              }}
-            />
             <Button>
               <Icons.Printer className="w-4 h-4 mr-2" />
               Print Profile

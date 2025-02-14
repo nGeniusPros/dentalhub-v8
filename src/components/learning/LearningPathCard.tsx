@@ -1,4 +1,3 @@
-```typescript
 import React from 'react';
 import { motion } from 'framer-motion';
 import * as Icons from 'lucide-react';
@@ -45,7 +44,7 @@ export const LearningPathCard: React.FC<LearningPathCardProps> = ({
             <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
               <div
                 className="h-full bg-primary rounded-full transition-all duration-300"
-                style={{ width: `${path.progress}%` }}
+                style={{ width: `${((path.progress || 0) * 100).toFixed(0)}%` }}
               />
             </div>
           </div>
@@ -129,4 +128,3 @@ export const LearningPathCard: React.FC<LearningPathCardProps> = ({
     </motion.div>
   );
 };
-```
