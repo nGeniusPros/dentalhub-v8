@@ -1,13 +1,24 @@
 import React from "react";
 import { motion } from "framer-motion";
-import * as Icons from "lucide-react";
+import { Users, Calendar, DollarSign, Activity, TrendingUp, FileText } from "lucide-react";
 import { cn } from "../../utils/cn";
+
+type IconName = 'users' | 'calendar' | 'dollar-sign' | 'activity' | 'trending-up' | 'file-text';
+
+const iconComponents: Record<IconName, any> = {
+  'users': Users,
+  'calendar': Calendar,
+  'dollar-sign': DollarSign,
+  'activity': Activity,
+  'trending-up': TrendingUp,
+  'file-text': FileText
+};
 
 interface StatsCardProps {
   title: string;
   value: string | number;
   change?: number;
-  icon: keyof typeof Icons;
+  icon: IconName;
   variant: "primary" | "secondary" | "accent1" | "accent2";
 }
 
@@ -19,7 +30,7 @@ const variantStyles = {
 };
 
 const StatsCard = ({ title, value, change, icon, variant }: StatsCardProps) => {
-  const Icon = Icons[icon];
+  const IconComponent = iconComponents[icon];
 
   return (
     <motion.div
@@ -29,7 +40,7 @@ const StatsCard = ({ title, value, change, icon, variant }: StatsCardProps) => {
     >
       <div className="flex items-center justify-between">
         <div className={cn("p-3 rounded-lg shadow-md", variantStyles[variant])}>
-          <Icon className="w-6 h-6" />
+          <IconComponent className="w-6 h-6" />
         </div>
         {change !== undefined && (
           <motion.span
